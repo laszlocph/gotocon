@@ -29,12 +29,11 @@ pipeline {
         stage('deploy') {
             agent {
                 docker {
-                    image 'docker'
+                    image 'laszlocloud/kubectl'
                 }
             }
-
             steps {
-                sh 'echo Deploying'
+                sh 'kubectl get pods'
             }
         }
     }
