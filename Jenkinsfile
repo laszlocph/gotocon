@@ -32,8 +32,12 @@ pipeline {
                     image 'laszlocloud/kubectl'
                 }
             }
+            environment {
+                K8S_TOKEN = credentials('k8s-token')
+            }
             steps {
-                sh 'kubectl get pods'
+                sh 'kubectl apply -f gotocon.yml --server https://api.theselfservicedev.com:6443 --insecure-skip-tls-verify=true --token $K8S_TOKEN'
+                sh 'kubectl rollout status deployment/gotocon -w --server https://api.theselfservicedev.com:6443 --insecure-skip-tls-verify=true --token $K8S_TOKEN'
             }
         }
     }
