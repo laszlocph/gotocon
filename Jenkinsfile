@@ -17,8 +17,8 @@ pipeline {
             }
             steps {
                 unstash 'gotocon-jar'
-                sh 'ls'
-                sh 'docker ps'
+                sh 'cp build/libs/gotocon-1.0-SNAPSHOT.jar docker/'
+                sh 'docker build -t laszlocloud/gotocon docker/'
             }
         }
     }
