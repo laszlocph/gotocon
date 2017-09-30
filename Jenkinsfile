@@ -15,20 +15,6 @@ pipeline {
                     args '-v /var/run/docker.sock:/var/run/docker.sock'
                 }
             }
-            steps {
-                unstash 'gotocon-jar'
-                sh 'cp build/libs/gotocon-1.0-SNAPSHOT.jar docker/'
-                sh 'docker build -t laszlocloud/gotocon docker/'
-                sh 'docker push laszlocloud/gotocon'
-            }
-        }
-        stage('deploy') {
-            agent {
-                docker {
-                    image 'docker'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock'
-                }
-            }
             environment {
                 DOCKERHUB = credentials('dockerhub')
             }
@@ -38,6 +24,17 @@ pipeline {
                 sh 'docker build -t laszlocloud/gotocon docker/'
                 sh 'docker login -u DOCKERHUB_USR -p DOCKERHUB_PSW'
                 sh 'docker push laszlocloud/gotocon'
+            }
+        }
+        stage('deploy') {
+            agent {
+                docker {
+                    image 'docker'
+                }
+            }
+
+            steps {
+                sh 'echo Deploying'
             }
         }
     }
