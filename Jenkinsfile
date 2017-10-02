@@ -4,7 +4,6 @@ pipeline {
         stage('gradle-build') {
             agent { docker 'gradle:4.2.0-jdk8-alpine' }
             steps {
-                sh 'echo $GIT_COMMIT'
                 sh 'gradle clean build'
                 stash includes: 'build/libs/gotocon-1.0-SNAPSHOT.jar', name: 'gotocon-jar'
             }
