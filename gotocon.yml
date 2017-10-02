@@ -63,7 +63,7 @@ items:
       kubernetes.io/ingress.class: "external"
   spec:
     rules:
-    - host: gotocon5.theselfservicedev.com
+    - host: gotocon.theselfservicedev.com
       http:
         paths:
         - backend:
