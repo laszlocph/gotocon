@@ -26,14 +26,14 @@ items:
             httpGet:
               path: /health
               port: 8080
-            initialDelaySeconds: 20
+            initialDelaySeconds: 30
             timeoutSeconds: 2
             periodSeconds: 3
           readinessProbe:
             httpGet:
               path: /health
               port: 8080
-            initialDelaySeconds: 20
+            initialDelaySeconds: 30
             timeoutSeconds: 2
             periodSeconds: 3
 - kind: Service
