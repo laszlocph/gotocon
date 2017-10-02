@@ -15,6 +15,7 @@ items:
         containers:
         - name: gotocon
           image: laszlocloud/gotocon
+          imagePullPolicy: Always
           resources:
             requests:
               memory: 512Mi
