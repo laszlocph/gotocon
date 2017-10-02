@@ -6,7 +6,7 @@ items:
   metadata:
     name: gotocon
   spec:
-    replicas: 1
+    replicas: 2
     strategy:
       type: RollingUpdate
       rollingUpdate:
