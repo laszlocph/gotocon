@@ -26,8 +26,12 @@ items:
         - name: gotocon
           image: laszlocloud/gotocon
           resources:
+            requests:
+              memory: 256Mi
+              cpu: 250m
             limits:
               memory: 1G
+              cpu: 500m
           livenessProbe:
             httpGet:
               path: /health
