@@ -12,16 +12,6 @@ items:
         labels:
           app: gotocon
       spec:
-        affinity:
-          podAntiAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              - labelSelector:
-                  matchExpressions:
-                    - key: "app"
-                      operator: In
-                      values: 
-                      - gotocon
-                topologyKey: "kubernetes.io/hostname"
         containers:
         - name: gotocon
           image: laszlocloud/gotocon
