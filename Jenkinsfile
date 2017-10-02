@@ -22,9 +22,9 @@ pipeline {
             steps {
                 unstash 'gotocon-jar'
                 sh 'cp build/libs/gotocon-1.0-SNAPSHOT.jar docker/'
-                sh 'docker build -t laszlocloud/gotocon docker/'
+                sh 'docker build -t laszlocloud/gotocon:$GIT_COMMIT docker/'
                 sh 'docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW'
-                sh 'docker push laszlocloud/gotocon'
+                sh 'docker push laszlocloud/gotocon:$GIT_COMMIT'
             }
         }
         stage('deploy') {
@@ -37,7 +37,7 @@ pipeline {
                 K8S_TOKEN = credentials('k8s-token')
             }
             steps {
-                sh 'kubectl apply -f gotocon.yml --server https://10.0.0.237:6443 --insecure-skip-tls-verify=true --token $K8S_TOKEN'
+                sh 'cat gotocon.yml | sed "s#laszlocloud/gotocon#laszlocloud/gotocon:$GIT_COMMIT#g" | kubectl apply --server https://10.0.0.237:6443 --insecure-skip-tls-verify=true --token $K8S_TOKEN -f -'
                 sh 'kubectl rollout status deployment/gotocon -w --server https://10.0.0.237:6443 --insecure-skip-tls-verify=true --token $K8S_TOKEN'
             }
         }
