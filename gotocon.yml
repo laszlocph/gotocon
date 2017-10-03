@@ -10,7 +10,7 @@ items:
     strategy:
       type: RollingUpdate
       rollingUpdate:
-        maxSurge: 50%
+        maxSurge: 100%
         maxUnavailable: 10%
     template:
       metadata:
@@ -59,11 +59,11 @@ items:
     name: gotocon
     annotations:
       # https://github.com/kubernetes/ingress/blob/master/controllers/nginx/configuration.md#custom-max-body-size
-      ingress.kubernetes.io/proxy-body-size: 8m
+      ingress.kubernetes.io/proxy-body-size: 1000m
       kubernetes.io/ingress.class: "external"
   spec:
     rules:
-    - host: gotocon2.theselfservicedev.com
+    - host: testdomain.theselfservicedev.com
       http:
         paths:
         - backend:
