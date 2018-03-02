@@ -2,5 +2,5 @@ pipeline:
   build:
     image: anapsix/alpine-java:8_jdk
     commands:
-      - echo "Hello Docker Meetup !!!!!"
+      - echo "Hello Docker Meetup test!!!!!"
       - ./gradlew clean build
